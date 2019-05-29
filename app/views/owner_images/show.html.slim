@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Url:
+  = @owner_image.url
+p
+  strong Food:
+  = @owner_image.food
+p
+  strong User:
+  = @owner_image.user
+
+=> link_to 'Edit', edit_owner_image_path(@owner_image)
+'|
+=< link_to 'Back', owner_images_path

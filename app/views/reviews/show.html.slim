@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Star:
+  = @review.star
+p
+  strong Food:
+  = @review.food
+p
+  strong User:
+  = @review.user
+
+=> link_to 'Edit', edit_review_path(@review)
+'|
+=< link_to 'Back', reviews_path

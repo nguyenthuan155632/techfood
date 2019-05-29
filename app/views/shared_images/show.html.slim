@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Url:
+  = @shared_image.url
+p
+  strong Food:
+  = @shared_image.food
+p
+  strong User:
+  = @shared_image.user
+
+=> link_to 'Edit', edit_shared_image_path(@shared_image)
+'|
+=< link_to 'Back', shared_images_path

@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Food:
+  = @food_information.food
+p
+  strong Description:
+  = @food_information.description
+p
+  strong Detail:
+  = @food_information.detail
+p
+  strong Address:
+  = @food_information.address
+p
+  strong Phone number:
+  = @food_information.phone_number
+
+=> link_to 'Edit', edit_food_information_path(@food_information)
+'|
+=< link_to 'Back', food_informations_path

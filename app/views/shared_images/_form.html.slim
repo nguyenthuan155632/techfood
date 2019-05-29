@@ -1,0 +1,18 @@
+= form_for @shared_image do |f|
+  - if @shared_image.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@shared_image.errors.count, "error")} prohibited this shared_image from being saved:"
+      ul
+        - @shared_image.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :url
+    = f.text_field :url
+  .field
+    = f.label :food
+    = f.text_field :food
+  .field
+    = f.label :user
+    = f.text_field :user
+  .actions = f.submit

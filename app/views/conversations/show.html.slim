@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Channel:
+  = @conversation.channel
+p
+  strong Mode:
+  = @conversation.mode
+p
+  strong Status:
+  = @conversation.status
+p
+  strong Expire at:
+  = @conversation.expire_at
+
+=> link_to 'Edit', edit_conversation_path(@conversation)
+'|
+=< link_to 'Back', conversations_path

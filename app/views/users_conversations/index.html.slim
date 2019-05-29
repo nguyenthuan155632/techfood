@@ -1,0 +1,23 @@
+h1 Listing users_conversations
+
+table
+  thead
+    tr
+      th User
+      th Conversation
+      th
+      th
+      th
+
+  tbody
+    - @users_conversations.each do |users_conversation|
+      tr
+        td = users_conversation.user
+        td = users_conversation.conversation
+        td = link_to 'Show', users_conversation
+        td = link_to 'Edit', edit_users_conversation_path(users_conversation)
+        td = link_to 'Destroy', users_conversation, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Users conversation', new_users_conversation_path

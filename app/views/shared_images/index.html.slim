@@ -1,0 +1,25 @@
+h1 Listing shared_images
+
+table
+  thead
+    tr
+      th Url
+      th Food
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @shared_images.each do |shared_image|
+      tr
+        td = shared_image.url
+        td = shared_image.food
+        td = shared_image.user
+        td = link_to 'Show', shared_image
+        td = link_to 'Edit', edit_shared_image_path(shared_image)
+        td = link_to 'Destroy', shared_image, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Shared image', new_shared_image_path

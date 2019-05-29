@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Display name:
+  = @food.display_name
+p
+  strong Status:
+  = @food.status
+p
+  strong Category:
+  = @food.category
+p
+  strong Source:
+  = @food.source
+p
+  strong User:
+  = @food.user
+
+=> link_to 'Edit', edit_food_path(@food)
+'|
+=< link_to 'Back', foods_path

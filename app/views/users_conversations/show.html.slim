@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong User:
+  = @users_conversation.user
+p
+  strong Conversation:
+  = @users_conversation.conversation
+
+=> link_to 'Edit', edit_users_conversation_path(@users_conversation)
+'|
+=< link_to 'Back', users_conversations_path

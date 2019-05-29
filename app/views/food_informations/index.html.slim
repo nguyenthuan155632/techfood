@@ -1,0 +1,29 @@
+h1 Listing food_informations
+
+table
+  thead
+    tr
+      th Food
+      th Description
+      th Detail
+      th Address
+      th Phone number
+      th
+      th
+      th
+
+  tbody
+    - @food_informations.each do |food_information|
+      tr
+        td = food_information.food
+        td = food_information.description
+        td = food_information.detail
+        td = food_information.address
+        td = food_information.phone_number
+        td = link_to 'Show', food_information
+        td = link_to 'Edit', edit_food_information_path(food_information)
+        td = link_to 'Destroy', food_information, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Food information', new_food_information_path

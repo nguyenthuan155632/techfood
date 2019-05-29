@@ -1,0 +1,2 @@
+module OwnerImagesHelper
+end

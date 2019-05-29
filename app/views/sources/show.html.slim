@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @source.name
+p
+  strong Display name:
+  = @source.display_name
+
+=> link_to 'Edit', edit_source_path(@source)
+'|
+=< link_to 'Back', sources_path

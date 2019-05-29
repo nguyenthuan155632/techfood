@@ -1,0 +1,25 @@
+h1 Listing owner_images
+
+table
+  thead
+    tr
+      th Url
+      th Food
+      th User
+      th
+      th
+      th
+
+  tbody
+    - @owner_images.each do |owner_image|
+      tr
+        td = owner_image.url
+        td = owner_image.food
+        td = owner_image.user
+        td = link_to 'Show', owner_image
+        td = link_to 'Edit', edit_owner_image_path(owner_image)
+        td = link_to 'Destroy', owner_image, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Owner image', new_owner_image_path
