@@ -6,19 +6,20 @@
         - @user.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :name
-    = f.text_field :name
-  .field
+    = f.text_field :name, class: 'form-control', placeholder: 'Ex: Nguyen Thuan'
+  .form-group
     = f.label :email
-    = f.text_field :email
-  .field
+    = f.text_field :email, class: 'form-control', placeholder: 'Ex: admin@techfood.com'
+  .form-group
     = f.label :department
-    = f.text_field :department
-  .field
+    = f.text_field :department, class: 'form-control', placeholder: 'Ex: Raksul'
+  .form-group
     = f.label :phone_number
-    = f.text_field :phone_number
-  .field
+    = f.text_field :phone_number, class: 'form-control', placeholder: 'Ex: +84975165068'
+  .form-group
     = f.label :role
-    = f.text_field :role
-  .actions = f.submit
+    = f.text_field :role, class: 'form-control', placeholder: 'Ex: admin'
+  .form-group = f.submit class: 'btn btn-primary'
+
