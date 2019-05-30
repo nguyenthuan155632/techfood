@@ -1,0 +1,18 @@
+h1 Import new food
+
+= form_tag food_import_path, method: :post
+
+  = hidden_field_tag :user_id, current_user.id
+  .form-group
+    = label_tag :category_id, 'Category'
+    = select_tag :category_id, options_for_select(ancestry_options(@hierarchical_categories)), multiple: true, class: 'form-control'
+  .form-group
+    = label_tag :source_id, 'Source'
+    = select_tag :source_id, options_for_select(Source.all.collect { |s| [s.display_name, s.id] }), class: 'form-control'
+  .form-group
+    = label_tag :data_json, 'Json data'
+    = text_area_tag :data_json, nil, rows: 20, class: 'form-control'
+  .form-group
+    = submit_tag 'Import a new food', class: 'btn btn-primary'
+
+= link_to 'Back', foods_path

@@ -1,11 +1,17 @@
-p#notice = notice
+h1 Category detail
 
-p
-  strong Name:
-  = @category.name
-p
-  strong Display name:
-  = @category.display_name
+table.table
+  tbody
+    tr
+      th 
+        strong
+          | Name:
+      td = @category.name
+    tr
+      th 
+        strong
+          | Display name:
+      td = @category.display_name
 
 => link_to 'Edit', edit_category_path(@category)
 '|

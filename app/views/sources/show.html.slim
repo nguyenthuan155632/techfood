@@ -1,11 +1,17 @@
-p#notice = notice
+h1 Source detail
 
-p
-  strong Name:
-  = @source.name
-p
-  strong Display name:
-  = @source.display_name
+table.table
+  tbody
+    tr
+      th 
+        strong
+          | Name:
+      td = @source.name
+    tr
+      th 
+        strong
+          | Display name:
+      td = @source.display_name
 
 => link_to 'Edit', edit_source_path(@source)
 '|

@@ -42,6 +42,9 @@ gem 'html2slim'
 gem 'bootstrap', '4.1.1'
 gem 'material-sass', '4.1.1'
 gem 'devise'
+gem 'rails-patterns'
+gem 'ancestry'
+gem 'simple_form'
 
 
 group :development, :test do

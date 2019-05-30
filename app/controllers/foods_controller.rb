@@ -1,5 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
+  before_action :hierarchical_categories, only: [:new, :edit]
 
   # GET /foods
   # GET /foods.json
@@ -70,5 +71,9 @@ class FoodsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def food_params
       params.require(:food).permit(:display_name, :status, :category_id, :source_id, :user_id)
+    end
+
+    def hierarchical_categories
+      @hierarchical_categories = Category.arrange(order: :display_name)
     end
 end

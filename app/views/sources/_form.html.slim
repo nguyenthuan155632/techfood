@@ -1,4 +1,4 @@
-= form_for @source do |f|
+= simple_form_for @source do |f|
   - if @source.errors.any?
     #error_explanation
       h2 = "#{pluralize(@source.errors.count, "error")} prohibited this source from being saved:"
@@ -6,10 +6,8 @@
         - @source.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :display_name
-    = f.text_field :display_name
-  .actions = f.submit
+  .form-group
+    = f.input :name, input_html: { class: 'form-control', placeholder: 'Ex: foody' }
+  .form-group
+    = f.input :display_name, input_html: { class: 'form-control', placeholder: 'Ex: Foody' }
+  .form-group = f.submit class: 'btn btn-primary'

@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :hierarchical_categories, only: [:new, :edit]
 
   # GET /categories
   # GET /categories.json
@@ -69,6 +70,10 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :display_name)
+      params.require(:category).permit(:name, :display_name, :parent_id)
+    end
+
+    def hierarchical_categories
+      @hierarchical_categories = Category.arrange(order: :display_name)
     end
 end

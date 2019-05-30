@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :reviews
   resources :comments
   resources :food_informations
-  resources :foods
+  resources :foods do
+    collection do
+      resource :import, controller: 'foods/imports', as: :food_import, only: %i[new create]
+    end
+  end
   resources :sources
   resources :users
   resources :categories
