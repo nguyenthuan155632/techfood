@@ -1,20 +1,93 @@
 p#notice = notice
 
-p
-  strong Display name:
-  = @food.display_name
-p
-  strong Status:
-  = @food.status
-p
-  strong Category:
-  = @food.category
-p
-  strong Source:
-  = @food.source
-p
-  strong User:
-  = @food.user
+table.table
+  tbody
+    tr
+      th 
+        strong
+          | Display name:
+      td = @food.display_name
+    tr
+      th 
+        strong
+          | Category:
+      td = @food.categories.pluck(:display_name).join(', ')
+    tr
+      th 
+        strong
+          | Source:
+      td = @food.source.display_name
+    tr
+      th 
+        strong
+          | User:
+      td = @food.user.name
+    tr
+      th 
+        strong
+          | District:
+      td = @food.food_information.district
+    tr
+      th 
+        strong
+          | City:
+      td = @food.food_information.city
+    tr
+      th 
+        strong
+          | Total review:
+      td = @food.food_information.total_review
+    tr
+      th 
+        strong
+          | Total view:
+      td = @food.food_information.total_view
+    tr
+      th 
+        strong
+          | Average rating:
+      td = @food.food_information.avg_rating
+    tr
+      th 
+        strong
+          | Review url:
+      td
+        - review_url = "https://www.foody.vn#{@food.food_information.review_url}"
+        = link_to review_url, review_url, target: :blank
+    tr
+      th 
+        strong
+          | Album url:
+      td
+        - album_url = "https://www.foody.vn#{@food.food_information.album_url}"
+        = link_to album_url, album_url, target: :blank
+    tr
+      th 
+        strong
+          | Latitude:
+      td = @food.food_information.latitude
+    tr
+      th 
+        strong
+          | Longitude:
+      td = @food.food_information.longitude
+    tr
+      th 
+        strong
+          | Location:
+      td = @food.food_information.location
+    tr
+      th 
+        strong
+          | Detail url:
+      td
+        - detail_url = "https://www.foody.vn#{@food.food_information.detail_url}"
+        = link_to detail_url, detail_url, target: :blank
+    tr
+      th 
+        strong
+          | Thumbnail:
+      td = image_tag @food.food_information.thumbnail_url 
 
 => link_to 'Edit', edit_food_path(@food)
 '|

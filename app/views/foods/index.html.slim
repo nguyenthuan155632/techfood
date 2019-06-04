@@ -1,28 +1,45 @@
-h1 Listing foods
+h1 Listing restaurants
+
+br
+
+= search_form_for @q do |f|
+  .form-group
+    = f.label :display_name_cont, 'Restaurent Name'
+    = f.search_field :display_name_cont, class: 'form-control', placeholder: 'Ex: The LOG Restaurant'
+  .form-group
+    = f.label :source_display_name_cont, 'Source Name'
+    = f.search_field :source_display_name_cont, class: 'form-control', placeholder: 'Ex: Foody'
+  .form-group
+    = f.label :categories_display_name_cont, 'Category Name'
+    = f.search_field :categories_display_name_cont, class: 'form-control', placeholder: 'Ex: Sang trọng'
+  .form-group
+    = f.submit class: 'btn btn-default'
 
 table.table
   thead
     tr
+      th ID
       th Display name
-      th Status
       th Category
       th Source
       th User
-      th
       th
       th
 
   tbody
     - @foods.each do |food|
       tr
+        td = food.id
         td = food.display_name
-        td = food.status
-        td = food.category
-        td = food.source
-        td = food.user
+        td = food.categories.pluck(:display_name).join(', ')
+        td = food.source.display_name
+        td = food.user.name
         td = link_to 'Show', food
         td = link_to 'Edit', edit_food_path(food)
-        td = link_to 'Destroy', food, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= paginate @foods
 
 br
 

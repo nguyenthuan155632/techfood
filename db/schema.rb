@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_144512) do
+ActiveRecord::Schema.define(version: 2019_06_04_180239) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2019_05_30_144512) do
     t.datetime "updated_at", null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_categories_on_ancestry"
+  end
+
+  create_table "categories_foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "food_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_categories_foods_on_category_id"
+    t.index ["food_id"], name: "index_categories_foods_on_food_id"
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -49,18 +58,30 @@ ActiveRecord::Schema.define(version: 2019_05_30_144512) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "district"
+    t.string "city"
+    t.integer "total_review"
+    t.integer "total_view"
+    t.string "avg_rating"
+    t.string "review_url"
+    t.string "album_url"
+    t.string "latitude"
+    t.string "longitude"
+    t.string "booking_url"
+    t.string "delivery_url"
+    t.string "location"
+    t.string "thumbnail_url"
+    t.string "detail_url"
     t.index ["food_id"], name: "index_food_informations_on_food_id"
   end
 
   create_table "foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "display_name", null: false
     t.string "status", null: false, comment: "pending, published, unpublished"
-    t.bigint "category_id", null: false
     t.bigint "source_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_foods_on_category_id"
     t.index ["source_id"], name: "index_foods_on_source_id"
     t.index ["user_id"], name: "index_foods_on_user_id"
   end
@@ -150,10 +171,11 @@ ActiveRecord::Schema.define(version: 2019_05_30_144512) do
     t.index ["user_id"], name: "index_users_conversations_on_user_id"
   end
 
+  add_foreign_key "categories_foods", "categories"
+  add_foreign_key "categories_foods", "foods"
   add_foreign_key "comments", "foods"
   add_foreign_key "comments", "users"
   add_foreign_key "food_informations", "foods"
-  add_foreign_key "foods", "categories"
   add_foreign_key "foods", "sources"
   add_foreign_key "foods", "users"
   add_foreign_key "messages", "conversations"

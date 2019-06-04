@@ -45,6 +45,8 @@ gem 'devise'
 gem 'rails-patterns'
 gem 'ancestry'
 gem 'simple_form'
+gem 'kaminari'
+gem 'ransack'
 
 
 group :development, :test do

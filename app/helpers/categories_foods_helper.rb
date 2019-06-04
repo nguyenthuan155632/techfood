@@ -1,0 +1,2 @@
+module CategoriesFoodsHelper
+end

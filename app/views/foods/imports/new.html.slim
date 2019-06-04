@@ -4,8 +4,8 @@ h1 Import new food
 
   = hidden_field_tag :user_id, current_user.id
   .form-group
-    = label_tag :category_id, 'Category'
-    = select_tag :category_id, options_for_select(ancestry_options(@hierarchical_categories)), multiple: true, class: 'form-control'
+    = label_tag :category, 'Category'
+    = select_tag :category, options_for_select(ancestry_options(@hierarchical_categories)), multiple: true, class: 'form-control'
   .form-group
     = label_tag :source_id, 'Source'
     = select_tag :source_id, options_for_select(Source.all.collect { |s| [s.display_name, s.id] }), class: 'form-control'

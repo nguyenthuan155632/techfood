@@ -4,8 +4,8 @@ class Foods::ImportsController < ApplicationController
   def new; end
   
   def create
-    food = ::Crawler::FoodyService.call(parameters).result
-    redirect_to food_path(food)
+    ::Crawler::FoodyService.call(parameters)
+    redirect_to new_food_import_path
   end
 
   private
@@ -15,7 +15,7 @@ class Foods::ImportsController < ApplicationController
     end
 
     def parameters
-      params.permit(:data_json, :source_id, :category_id, :user_id)
+      params.permit(:data_json, :source_id, :user_id, category: [])
     end
   
 end

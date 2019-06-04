@@ -1,2 +1,8 @@
 @import "material";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+ul.pagination {
+  li {
+    padding: 0 10px;
+  }
+}
