@@ -21,4 +21,7 @@ Rails.application.routes.draw do
   resources :categories_foods
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'top_pages#show'
+
+  resources :search_by_keywords, as: :search_by_keywords, only: %i[index]
+  resources :search_by_locations, as: :search_by_locations, only: %i[index]
 end

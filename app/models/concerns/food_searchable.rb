@@ -32,14 +32,24 @@ module FoodSearchable
     after_create_commit -> { ElasticsearchCreateIndexJob.perform_later(self.class.to_s, id) }
     after_update_commit -> { ElasticsearchUpdateIndexJob.perform_later(self.class.to_s, id) }
 
-    # This method is for only test for now
-    def self.match_all
-      search_definition = Elasticsearch::DSL::Search.search do
-        query do
-          match_all
-        end
-      end
-      __elasticsearch__.search(search_definition)
+    def self.elasticsearch(keywords, coordinate: nil)
+      definition = if coordinate
+                     {
+                       sort: [
+                         {
+                           _geo_distance: {
+                             location: [coordinate[:longitude].to_f, coordinate[:latitude].to_f],
+                             order: 'asc',
+                             unit: 'km'
+                           }
+                         }
+                       ],
+                       query: search_definition(keywords)
+                     }
+                   else
+                    { query: search_definition(keywords) }
+                   end
+      __elasticsearch__.search(definition)
     end
 
     def as_indexed_json(_options = {})
@@ -69,5 +79,21 @@ module FoodSearchable
         }
       }
     end
+
+    class << self
+      private
+
+      def search_definition(keywords)
+        {
+          multi_match: {
+            query: keywords,
+            fields: %w[address album_url avg_rating booking_url category_name
+                       city delivery_url detail_url display_name district
+                       phone_number review_url source_name thumbnail_url]
+          }
+        }
+      end
+    end
+
   end
 end

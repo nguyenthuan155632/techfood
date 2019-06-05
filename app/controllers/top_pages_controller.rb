@@ -1,7 +1,7 @@
 class TopPagesController < ApplicationController
 
   def show
-    @test = 'TEST'
+    @foods = Food.search_by_keyword('lau')
   end
 
 end
