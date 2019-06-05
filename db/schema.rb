@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2019_06_04_180239) do
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "display_name", null: false
     t.datetime "created_at", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
-  create_table "categories_foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "categories_foods", force: :cascade do |t|
     t.bigint "category_id"
     t.bigint "food_id"
     t.datetime "created_at", null: false
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["food_id"], name: "index_categories_foods_on_food_id"
   end
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.string "title"
     t.text "content", null: false
     t.bigint "food_id", null: false
@@ -41,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "conversations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "conversations", force: :cascade do |t|
     t.string "channel", null: false
     t.string "mode", null: false, comment: "public, private"
     t.string "status", null: false, comment: "openning, closed"
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "food_informations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "food_informations", force: :cascade do |t|
     t.bigint "food_id"
     t.text "description", null: false
     t.text "detail", null: false
@@ -75,7 +78,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["food_id"], name: "index_food_informations_on_food_id"
   end
 
-  create_table "foods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "foods", force: :cascade do |t|
     t.string "display_name", null: false
     t.string "status", null: false, comment: "pending, published, unpublished"
     t.bigint "source_id", null: false
@@ -86,7 +89,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["user_id"], name: "index_foods_on_user_id"
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
@@ -96,7 +99,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "notes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "notes", force: :cascade do |t|
     t.text "content", null: false
     t.bigint "conversation_id", null: false
     t.datetime "created_at", null: false
@@ -104,7 +107,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["conversation_id"], name: "index_notes_on_conversation_id"
   end
 
-  create_table "owner_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "owner_images", force: :cascade do |t|
     t.string "url", null: false
     t.bigint "food_id", null: false
     t.bigint "user_id", null: false
@@ -114,7 +117,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["user_id"], name: "index_owner_images_on_user_id"
   end
 
-  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "reviews", force: :cascade do |t|
     t.decimal "star", precision: 2, scale: 1, null: false
     t.bigint "food_id", null: false
     t.bigint "user_id", null: false
@@ -124,7 +127,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "shared_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "shared_images", force: :cascade do |t|
     t.string "url", null: false
     t.bigint "food_id", null: false
     t.bigint "user_id", null: false
@@ -134,14 +137,14 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["user_id"], name: "index_shared_images_on_user_id"
   end
 
-  create_table "sources", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "sources", force: :cascade do |t|
     t.string "name", null: false
     t.string "display_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "department"
@@ -162,7 +165,7 @@ ActiveRecord::Schema.define(version: 2019_06_04_180239) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "users_conversations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users_conversations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
     t.datetime "created_at", null: false

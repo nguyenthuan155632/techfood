@@ -1,0 +1,5 @@
+elasticsearch:
+  url: #
+  port: 443
+  region: ap-northeast-1
+  credentials_path: <%= File.join(ENV['HOME'], '.aws', 'credentials') %>

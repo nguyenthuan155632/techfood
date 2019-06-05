@@ -48,7 +48,16 @@ gem 'ancestry'
 gem 'simple_form'
 gem 'kaminari'
 gem 'ransack'
+gem 'config'
 
+#
+# Elasticsearch
+
+gem 'elasticsearch-dsl'
+gem 'elasticsearch-model', github: 'elastic/elasticsearch-rails', branch: '6.x'
+gem 'elasticsearch-rails', github: 'elastic/elasticsearch-rails', branch: '6.x'
+gem 'faraday_middleware'
+gem 'faraday_middleware-aws-sigv4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

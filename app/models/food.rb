@@ -1,4 +1,6 @@
 class Food < ApplicationRecord
+  include FoodSearchable
+
   has_many :categories_foods
   has_many :categories, through: :categories_foods
   has_one :food_information

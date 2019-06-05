@@ -1,25 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Create index
 
-Things you may want to cover:
+`bundle exec rake food:create_new_index`
 
-* Ruby version
+### Import data
 
-* System dependencies
+`bundle exec rake food:es_bulk_import`
 
-* Configuration
+### Geo Location and Search
 
-* Database creation
+```cassandraql
+GET /development-foods/_search
+{
+  "sort" : [
+    {
+      "_geo_distance" : {
+        "location" : [106.70526, 10.772069],
+        "order" : "asc",
+        "unit" : "km"
+      }
+    }
+  ],
+  "query" : {
+    "match_all" : {}
+  }
+}
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# techfood
