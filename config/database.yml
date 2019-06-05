@@ -82,4 +82,5 @@ production:
   <<: *default
   database: tech_food_production
   username: tech_food
-  password: <%= ENV['POSTGRESQLAPP_DATABASE_PASSWORD'] %>
+  password: <%= ENV['TECH_FOOD_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
