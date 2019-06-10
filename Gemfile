@@ -49,6 +49,7 @@ gem 'simple_form'
 gem 'kaminari'
 gem 'ransack'
 gem 'config'
+gem 'sidekiq'
 
 #
 # Elasticsearch

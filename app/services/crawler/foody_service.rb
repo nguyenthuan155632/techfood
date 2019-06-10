@@ -19,18 +19,15 @@ class Crawler::FoodyService < Patterns::Service
   def import_data!
     ApplicationRecord.transaction do
       items.each do |item|
-        validate!(item)
+        f = Food.find_by(display_name: item['Name'])
+        if f
+          category_ids = food.categories.ids + categories.ids
+          food.update!(categories: Category.where(id: category_ids))
+          next
+        end
         food = create_food!(item)
         create_food_information!(item, food)
       end
-    end
-  end
-
-  def validate!(item)
-    food = Food.find_by(display_name: item['Name'])
-    if food
-      category_ids = food.categories.ids + categories.ids
-      food.update!(categories: Category.where(id: category_ids))
     end
   end
 

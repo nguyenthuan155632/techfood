@@ -29,8 +29,8 @@ module FoodSearchable
       indexes :location, type: 'geo_point'
     end
 
-    after_create_commit -> { ElasticsearchCreateIndexJob.perform_later(self.class.to_s, id) }
-    after_update_commit -> { ElasticsearchUpdateIndexJob.perform_later(self.class.to_s, id) }
+    after_create_commit -> { ElasticsearchCreateIndexWorker.perform_async(self.class.to_s, id) }
+    after_update_commit -> { ElasticsearchUpdateIndexWorker.perform_async(self.class.to_s, id) }
 
     def self.elasticsearch(keywords, coordinate: nil)
       definition = if coordinate
@@ -47,38 +47,12 @@ module FoodSearchable
                        query: search_definition(keywords)
                      }
                    else
-                    { query: search_definition(keywords) }
+                     { query: search_definition(keywords) }
                    end
       __elasticsearch__.search(definition)
     end
 
-    def as_indexed_json(_options = {})
-      {
-        id: id,
-        display_name: display_name,
-        category_name: categories.pluck(:display_name).join(', '),
-        source_name: source.display_name,
-        description: food_information.description,
-        detail: food_information.detail,
-        address: food_information.address,
-        phone_number: food_information.phone_number,
-        district: food_information.district,
-        city: food_information.city,
-        total_review: food_information.total_review,
-        total_view: food_information.total_view,
-        avg_rating: food_information.avg_rating,
-        review_url: food_information.review_url,
-        album_url: food_information.album_url,
-        booking_url: food_information.booking_url,
-        delivery_url: food_information.delivery_url,
-        thumbnail_url: food_information.thumbnail_url,
-        detail_url: food_information.detail_url,
-        location: {
-          lat: food_information.latitude.to_f,
-          lon: food_information.longitude.to_f
-        }
-      }
-    end
+
 
     class << self
       private
@@ -95,5 +69,38 @@ module FoodSearchable
       end
     end
 
+    def as_indexed_json(_options = {})
+      {
+        id: id,
+        display_name: display_name,
+        category_name: categories.pluck(:display_name).join(', '),
+        source_name: source.display_name,
+        description: information.description,
+        detail: information.detail,
+        address: information.address,
+        phone_number: information.phone_number,
+        district: information.district,
+        city: information.city,
+        total_review: information.total_review,
+        total_view: information.total_view,
+        avg_rating: information.avg_rating,
+        review_url: information.review_url,
+        album_url: information.album_url,
+        booking_url: information.booking_url,
+        delivery_url: information.delivery_url,
+        thumbnail_url: information.thumbnail_url,
+        detail_url: information.detail_url,
+        location: {
+          lat: information.latitude.to_f,
+          lon: information.longitude.to_f
+        }
+      }
+    end
+
+    private
+
+    def information
+      @information ||= food_information
+    end
   end
 end

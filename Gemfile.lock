@@ -106,6 +106,7 @@ GEM
       activesupport (>= 3.0)
       deep_merge (~> 1.2.1)
       dry-validation (>= 0.12.2)
+    connection_pool (2.2.2)
     crass (1.0.4)
     deep_merge (1.2.1)
     descendants_tracker (0.0.4)
@@ -223,6 +224,8 @@ GEM
     public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
+    rack-protection (2.0.5)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.3)
@@ -262,6 +265,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    redis (4.1.0)
     regexp_parser (1.5.1)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -282,6 +286,11 @@ GEM
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
+    sidekiq (5.2.5)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack (>= 1.5.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     simple_form (4.1.0)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -364,6 +373,7 @@ DEPENDENCIES
   ransack
   sass-rails (~> 5.0)
   selenium-webdriver
+  sidekiq
   simple_form
   slim-rails
   spring

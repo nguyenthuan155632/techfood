@@ -3,7 +3,7 @@ class Food < ApplicationRecord
 
   has_many :categories_foods
   has_many :categories, through: :categories_foods
-  has_one :food_information
+  has_one :food_information, inverse_of: :food
   belongs_to :source
   belongs_to :user
 
