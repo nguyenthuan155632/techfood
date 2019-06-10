@@ -1,0 +1,40 @@
+h1 Search
+
+= form_tag search_path, method: :get
+
+  / TODO: use dynamic coordinate later
+  = hidden_field_tag :latitude, User::LOCATION[:latitude]
+  = hidden_field_tag :longitude, User::LOCATION[:longitude]
+
+  .form-group
+    = label_tag :keyword, 'Question'
+    = text_field_tag :keyword, nil, class: 'form-control', placeholder: 'Input some texts'
+  .form-group
+    = submit_tag 'Search', class: 'btn btn-primary'
+
+  = link_to 'Back', foods_path
+
+
+- if @foods.present?
+
+  table.table
+    thead
+      tr
+        th ID
+        th Restaurant name
+        th Category name
+        th Address
+        th District
+        th Distance
+
+    tbody
+      - @foods.each do |food|
+        tr
+          td = link_to food.id, food_path(id: food.id)
+          td = food.display_name
+          td = food.category_name
+          td = food.address
+          td = food.district
+          td
+            = food[:sort][0].round(2)
+            |  km

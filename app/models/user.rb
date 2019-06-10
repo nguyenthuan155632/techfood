@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  LOCATION = { latitude: '10.77307575675075', longitude: '106.72767170503232' }.freeze
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
